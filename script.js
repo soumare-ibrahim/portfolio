@@ -1,30 +1,29 @@
-// Petit effet d'animation sur le titre
+// Animation progressive du titre
 document.addEventListener("DOMContentLoaded", () => {
   const title = document.querySelector("h1");
-  if(title){
+  if (title) {
     title.style.opacity = 0;
     title.style.transition = "opacity 2s ease-in-out";
     setTimeout(() => (title.style.opacity = 1), 200);
   }
 });
 
-// Animation d'éclairs aléatoires
+// Fonction éclairs (désactivée au chargement par défaut)
 function flashLightning() {
   const flash = document.createElement("div");
   flash.className = "lightning";
   document.body.appendChild(flash);
 
   flash.style.opacity = 1;
-  flash.style.transition = "opacity 0.1s";
+  setTimeout(() => (flash.style.opacity = 0.8), 50);
+  setTimeout(() => (flash.style.opacity = 0.3), 120);
+  setTimeout(() => (flash.style.opacity = 0), 200);
 
-  setTimeout(() => {
-    flash.style.opacity = 0;
-    setTimeout(() => flash.remove(), 100);
-  }, 100);
+  setTimeout(() => flash.remove(), 300);
 
-  // Appel suivant aléatoire
-  setTimeout(flashLightning, Math.random() * 5000 + 2000);
+  // Relance entre 3 et 8 secondes aléatoires
+  setTimeout(flashLightning, Math.random() * 5000 + 3000);
 }
 
-// Démarre les éclairs
-flashLightning();
+// ⚠️ Pas d’appel automatique de flashLightning() 
+// (tu peux le réactiver en écrivant flashLightning(); à la fin)
